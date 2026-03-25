@@ -1,0 +1,74 @@
+<UserControl x:Class="HiveTestProject.Views.NotesWidget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+    <Border Style="{StaticResource GlassPanel}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header with Add/Delete buttons -->
+            <Grid Grid.Row="0" Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Quick Notes" Style="{StaticResource HeaderText}" />
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button Content="&#xE710;" FontFamily="Segoe MDL2 Assets"
+                            Style="{StaticResource GlassButton}" Padding="8,4"
+                            Command="{Binding AddNoteCommand}" ToolTip="Add Note" Margin="0,0,4,0" />
+                    <Button Content="&#xE74D;" FontFamily="Segoe MDL2 Assets"
+                            Style="{StaticResource GlassButton}" Padding="8,4"
+                            Command="{Binding DeleteNoteCommand}" ToolTip="Delete Note" />
+                </StackPanel>
+            </Grid>
+
+            <!-- Notes List + Editor -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Notes List -->
+                <ListBox Grid.Column="0"
+                         Style="{StaticResource GlassListBox}"
+                         ItemContainerStyle="{StaticResource GlassListBoxItem}"
+                         ItemsSource="{Binding Notes}"
+                         SelectedItem="{Binding SelectedNote}"
+                         Margin="0,0,8,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Content}" Foreground="White"
+                                           TextTrimming="CharacterEllipsis" MaxWidth="130"
+                                           FontSize="12" />
+                                <TextBlock Text="{Binding ModifiedAt, StringFormat='{}{0:MMM dd, HH:mm}'}"
+                                           Foreground="{StaticResource TextSecondaryBrush}"
+                                           FontSize="10" Margin="0,2,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <!-- Editor -->
+                <TextBox Grid.Column="1"
+                         Style="{StaticResource GlassTextBox}"
+                         Text="{Binding EditorContent, UpdateSourceTrigger=PropertyChanged}"
+                         AcceptsReturn="True"
+                         AcceptsTab="True"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         VerticalContentAlignment="Top" />
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
