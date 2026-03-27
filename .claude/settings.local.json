@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(dotnet build:*)",
-      "Bash(\"/mnt/c/Program Files/dotnet/dotnet.exe\" build HiveTestProject/HiveTestProject.csproj 2>&1)"
+      "Bash(\"/mnt/c/Program Files/dotnet/dotnet.exe\" build HiveTestProject/HiveTestProject.csproj 2>&1)",
+      "Bash(git worktree:*)",
+      "Bash(git branch:*)"
     ]
   }
 }

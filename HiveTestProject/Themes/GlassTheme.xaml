@@ -257,6 +257,43 @@
     </Style>
 
     <!-- ═══════════════════════════════════════════ -->
+    <!-- CheckBox Style (for To-Do)                  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <Style x:Key="GlassCheckBox" TargetType="CheckBox">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid>
+                        <Border x:Name="box"
+                                Width="18" Height="18"
+                                Background="Transparent"
+                                BorderBrush="{StaticResource PanelBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="3"
+                                SnapsToDevicePixels="True" />
+                        <TextBlock x:Name="check"
+                                   Text="&#xE73E;" FontFamily="Segoe MDL2 Assets"
+                                   Foreground="White" FontSize="12"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Visibility="Collapsed" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="box" Property="Background" Value="{StaticResource AccentBrush}" />
+                            <Setter TargetName="box" Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                            <Setter TargetName="check" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="box" Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ═══════════════════════════════════════════ -->
     <!-- ScrollBar Style                             -->
     <!-- ═══════════════════════════════════════════ -->
     <Style TargetType="ScrollBar">
